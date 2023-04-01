@@ -1,8 +1,13 @@
 import tkinter
-import decimal
-import random as rm
 
 
-def throw_dice(label: tkinter.Label) -> None:
-    num = rm.randint(1, 6)
-    label['text'] = num
+# add spaces?
+def num_btn(output: tkinter.Label, num: str) -> None:
+    output_len = len(output['text'])
+    if int(output['text']) == 0:
+        output['text'] = num
+    elif output_len < 16:
+        output['text'] += num
+    else:
+        return
+
