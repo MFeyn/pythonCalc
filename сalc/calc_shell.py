@@ -16,13 +16,16 @@ CalcWindow.columnconfigure(0, weight=1, minsize=400)
 
 # OUTPUT FRAME
 frm_output = tkinter.Frame(CalcWindow, borderwidth=3, relief=tkinter.GROOVE, padx=5, pady=5)
+lbl_prev_input = tkinter.Label(frm_output, font=('Arial', 15))
 lbl_output = tkinter.Label(frm_output, text='0', font=('Arial', 20))
 
 frm_output.columnconfigure(0, weight=1)
 frm_output.rowconfigure(0, weight=1)
+frm_output.rowconfigure(1, weight=1)
 # check resize
 frm_output.grid(row=0, column=0, sticky='nswe')
-lbl_output.grid(row=0, column=0, padx=15, sticky='e')
+lbl_prev_input.grid(row=0, column=0, padx=15, sticky='e')
+lbl_output.grid(row=1, column=0, padx=15, sticky='e')
 
 # MEMORY BUTTONS FRAME
 frm_mem_btns = tkinter.Frame(CalcWindow, borderwidth=3, relief=tkinter.SUNKEN, pady=5, padx=5)
@@ -54,29 +57,46 @@ btn_del = tkinter.Button(frm_btns_field, text='\N{LEFTWARDS BLACK ARROW}')
 btn_denom = tkinter.Button(frm_btns_field, text='1/x')
 btn_square = tkinter.Button(frm_btns_field, text='x^2')
 btn_sqrt = tkinter.Button(frm_btns_field, text='√')
-btn_div = tkinter.Button(frm_btns_field, text='/')
+btn_div = tkinter.Button(frm_btns_field, text='/',
+                         command=lambda: cf.oper_btn(lbl_prev_input, lbl_output, btn_div['text']))
 
-btn_sev = tkinter.Button(frm_btns_field, text='7', command=lambda: cf.num_btn(lbl_output, btn_sev['text']))
-btn_eight = tkinter.Button(frm_btns_field, text='8', command=lambda: cf.num_btn(lbl_output, btn_eight['text']))
-btn_nine = tkinter.Button(frm_btns_field, text='9', command=lambda: cf.num_btn(lbl_output, btn_nine['text']))
+btn_sev = tkinter.Button(frm_btns_field, text='7',
+                         command=lambda: cf.num_btn(lbl_prev_input, lbl_output, btn_sev['text']))
+btn_eight = tkinter.Button(frm_btns_field, text='8',
+                           command=lambda: cf.num_btn(lbl_prev_input, lbl_output, btn_eight['text']))
+btn_nine = tkinter.Button(frm_btns_field, text='9',
+                          command=lambda: cf.num_btn(lbl_prev_input, lbl_output, btn_nine['text']))
+
+a = tkinter.StringVar
 
 # mb change symbol
-btn_multi = tkinter.Button(frm_btns_field, text='×')
+btn_multi = tkinter.Button(frm_btns_field, text='×',
+                           command=lambda: cf.oper_btn(lbl_prev_input, lbl_output, btn_multi['text']))
 
-btn_four = tkinter.Button(frm_btns_field, text='4', command=lambda: cf.num_btn(lbl_output, btn_four['text']))
-btn_five = tkinter.Button(frm_btns_field, text='5', command=lambda: cf.num_btn(lbl_output, btn_five['text']))
-btn_six = tkinter.Button(frm_btns_field, text='6', command=lambda: cf.num_btn(lbl_output, btn_six['text']))
-btn_minus = tkinter.Button(frm_btns_field, text='-')
+btn_four = tkinter.Button(frm_btns_field, text='4',
+                          command=lambda: cf.num_btn(lbl_prev_input, lbl_output, btn_four['text']))
+btn_five = tkinter.Button(frm_btns_field, text='5',
+                          command=lambda: cf.num_btn(lbl_prev_input, lbl_output, btn_five['text']))
+btn_six = tkinter.Button(frm_btns_field, text='6',
+                         command=lambda: cf.num_btn(lbl_prev_input, lbl_output, btn_six['text']))
+btn_minus = tkinter.Button(frm_btns_field, text='-',
+                           command=lambda: cf.oper_btn(lbl_prev_input, lbl_output, btn_minus['text']))
 
-btn_one = tkinter.Button(frm_btns_field, text='1', command=lambda: cf.num_btn(lbl_output, btn_one['text']))
-btn_two = tkinter.Button(frm_btns_field, text='2', command=lambda: cf.num_btn(lbl_output, btn_two['text']))
-btn_three = tkinter.Button(frm_btns_field, text='3', command=lambda: cf.num_btn(lbl_output, btn_three['text']))
-btn_plus = tkinter.Button(frm_btns_field, text='+')
+btn_one = tkinter.Button(frm_btns_field, text='1',
+                         command=lambda: cf.num_btn(lbl_prev_input, lbl_output, btn_one['text']))
+btn_two = tkinter.Button(frm_btns_field, text='2',
+                         command=lambda: cf.num_btn(lbl_prev_input, lbl_output, btn_two['text']))
+btn_three = tkinter.Button(frm_btns_field, text='3',
+                           command=lambda: cf.num_btn(lbl_prev_input, lbl_output, btn_three['text']))
+btn_plus = tkinter.Button(frm_btns_field, text='+',
+                          command=lambda: cf.oper_btn(lbl_prev_input, lbl_output, btn_plus['text']))
 
 btn_change_sign = tkinter.Button(frm_btns_field, text='+/-')
-btn_zero = tkinter.Button(frm_btns_field, text='0', command=lambda: cf.num_btn(lbl_output, btn_zero['text']))
+btn_zero = tkinter.Button(frm_btns_field, text='0',
+                          command=lambda: cf.num_btn(lbl_prev_input, lbl_output, btn_zero['text']))
 btn_comma = tkinter.Button(frm_btns_field, text=',')
-btn_equals = tkinter.Button(frm_btns_field, text='=')
+btn_equals = tkinter.Button(frm_btns_field, text='=',
+                            command=lambda: cf.total_btn(lbl_prev_input, lbl_output))
 
 for i in range(6):
     frm_btns_field.rowconfigure(i, weight=1)
