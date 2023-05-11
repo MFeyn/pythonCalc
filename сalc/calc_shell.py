@@ -94,7 +94,8 @@ btn_plus = tkinter.Button(frm_btns_field, text='+',
 btn_change_sign = tkinter.Button(frm_btns_field, text='+/-')
 btn_zero = tkinter.Button(frm_btns_field, text='0',
                           command=lambda: cf.num_btn(lbl_prev_input, lbl_output, btn_zero['text']))
-btn_comma = tkinter.Button(frm_btns_field, text=',')
+btn_comma = tkinter.Button(frm_btns_field, text='.',
+                           command=lambda: cf.comma_btn(lbl_output))
 btn_equals = tkinter.Button(frm_btns_field, text='=',
                             command=lambda: cf.total_btn(lbl_prev_input, lbl_output))
 
